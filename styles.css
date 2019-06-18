@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display:700|PT+Serif:400|Roboto:400");
+
+header {
+  max-width: 500px;
+  width: 90%;
+  margin: 20px auto 20px auto;
+  text-align: left;
+  border-bottom: 1px solid silver;
+}
+
+h1 {
+  margin-bottom: 0px;
+  font-size: 2em;
+  font-family: "Playfair Display", "Times New Roman", Times, serif;
+  font-weight: bold;
+}
+
+h3 {
+  margin: 0px auto 10px auto;
+  color: gray;
+  font-size: 1em;
+  font-family: "PT Serif", "Times New Roman", Times, serif;
+  font-weight: normal;
+}
+
+h3 a {
+  color: gray;
+}
+
+h3 a:hover {
+  color: black;
+}
+
+body {
+  width: 95%;
+  margin: auto;
+  background-color: #ffffff;
+}
+
+article {
+  margin-bottom: 40px;
+}
+
+/* Responsive design */
+@media only screen and (max-width: 600px) {
+}
