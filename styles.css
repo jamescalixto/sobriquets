@@ -5,12 +5,16 @@
   --default: #f4f4f4;
   --red-emphasis: #f08080;
   --red: #ffafaf;
+  --red-light: #FFD3D3;
   --blue-emphasis: #82a6b9;
   --blue: #b8cfdc;
+  --blue-light: #cde6f4;
   --bystander-emphasis: #f0b380;
   --bystander: #ffd3af;
+  --bystander-light: #FFEBD3;
   --assassin-emphasis: #000000;
   --assassin: #333333;
+  --assassin-light: #666666;
   --assassin-text: #ffffff;
 }
 
@@ -147,8 +151,8 @@ article {
     45deg,
     var(--red),
     var(--red) 10px,
-    var(--red-emphasis) 10px,
-    var(--red-emphasis) 20px
+    var(--red-light) 10px,
+    var(--red-light) 25px
   );
 }
 .styling-blue {
@@ -161,8 +165,8 @@ article {
     45deg,
     var(--blue),
     var(--blue) 10px,
-    var(--blue-emphasis) 10px,
-    var(--blue-emphasis) 20px
+    var(--blue-light) 10px,
+    var(--blue-light) 25px
   );
 }
 .styling-bystander {
@@ -175,8 +179,8 @@ article {
     45deg,
     var(--bystander),
     var(--bystander) 10px,
-    var(--bystander-emphasis) 10px,
-    var(--bystander-emphasis) 20px
+    var(--bystander-light) 10px,
+    var(--bystander-light) 25px
   );
 }
 .styling-assassin {
@@ -190,8 +194,8 @@ article {
     45deg,
     var(--assassin),
     var(--assassin) 10px,
-    var(--assassin-emphasis) 10px,
-    var(--assassin-emphasis) 20px
+    var(--assassin-light) 10px,
+    var(--assassin-light) 25px
   );
   color: var(--assassin-text);
 }

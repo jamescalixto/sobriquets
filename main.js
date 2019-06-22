@@ -142,7 +142,7 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
     if (is_spymaster) {
       // Attribute to control displaying card as active (untouched)
       // or inactive (touched).
-      clone.setAttribute("active", true);
+      clone.setAttribute("active", "yes");
 
       setCardIdentity();
       setCardStyleFromState(clone);
@@ -153,6 +153,7 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
         // toggle whether it is active or inactive.
         const card_state = clone.getAttribute("state");
         const card_is_active = clone.getAttribute("active");
+        console.log(card_state, card_is_active);
 
         // Remove both possible active states.
         // Safari doesn't support .replace() :(
@@ -160,12 +161,12 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
         clone.classList.remove("styling-" + card_state + "-inactive");
 
         // Toggle styling based on whether card is active.
-        if (card_is_active) {
-          clone.setAttribute("active", false);
+        if (card_is_active == "yes") {
+          clone.setAttribute("active", "no");
           clone.classList.add("styling-" + card_state + "-inactive");
         } else {
-          clone.setAttribute("active", true);
-          clone.classList.replace("styling-" + card_state);
+          clone.setAttribute("active", "yes");
+          clone.classList.add("styling-" + card_state);
         }
 
         setCardStyleFromState(clone);
@@ -179,7 +180,6 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
         const current_state = clone.getAttribute("state");
         clone.classList.remove("styling-" + current_state);
         clone.setAttribute("state", cycleEnum(card_states, current_state));
-        console.log(current_state, cycleEnum(card_states, current_state));
         setCardStyleFromState(clone);
         updateStatusBar(hash_name, is_spymaster);
       });
