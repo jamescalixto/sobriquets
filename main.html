@@ -15,7 +15,7 @@
 
   <body>
     <script type="text/javascript" src="main.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/seedrandom.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/lib/alea.min.js"></script>
 
     <header>
       <h1>Sobriquets</h1>
@@ -26,16 +26,19 @@
       <div id="hash-container">
         <div id="hash-name" class="hash-instructions">
           (all) enter the room name
-          <input type="text" id="hash-name" value="">
+          <input type="text" id="hash-name-field" value="">
         </div>
         <div id="hash-password" class="hash-instructions">
           (spymaster) enter a password
-          <input type="text" id="hash-password" value="">
+          <input type="text" id="hash-password-field" value="">
+        </div>
+        <div id="hash-submit" class="hash-instructions">
+          <input type="button" id="hash-submit-button" onclick="buildNewGame()" value="Start game"> 
         </div>
       </div>
 
       <div id="card-template" class="card" style="display:none">
-          <h3 id="card-label" class="card-label">spaceship</h3>
+          <h3 id="card-label" class="card-label">sobriquets</h3>
       </div>
 
       <div id="board-container">
@@ -43,14 +46,21 @@
     </article>
     
     <script type="text/javascript">
-    // Read in the list of words, then set up everything
-    // in the callback function.
-    fetch('data/default.txt')
-      .then(response => response.text())
-      .then(text => text.split(','))
-      .then(function(text) {
-        testBuild(text);
-        console.log(text);
-      });
+    function buildNewGame() {
+      // Get input for seeds.
+      let hash_name = document.getElementById("hash-name-field").value;
+      let hash_password = document.getElementById("hash-password-field").value;
+      let isSpymaster = (hash_password !== "");
+
+      // Read in the list of words, then set up everything
+      // in the callback function.
+      fetch('data/default.txt')
+        .then(response => response.text())
+        .then(text => text.split(','))
+        .then(function(word_list) {
+          buildNewBoard(hash_name, hash_password, word_list, isSpymaster);
+        });
+    }
+
     </script>
 </html>
