@@ -81,6 +81,7 @@ article {
   border-radius: 8px;
 
   cursor: pointer;
+  user-select: none;
 }
 
 .card-label {
