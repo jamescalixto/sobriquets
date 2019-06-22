@@ -60,12 +60,13 @@
       // Players in the same time period (length given by SALT_PERIOD) will have
       // their hashes synchronized; outside this period the same input will give
       // different hashes. Allows players to reuse the same inputs.
-      const SALT_PERIOD = 100000000; // in milliseconds; about 27 hours
+      const SALT_PERIOD = 10000000; // in milliseconds; about 2.7 hours
       let time_salt = Math.floor(new Date().getTime() / SALT_PERIOD);
       hash_name += time_salt;
       hash_password += time_salt;
 
-      console.log(doesRedGoFirst(hash_password));
+      console.log(hash_name);
+
       // Read in the list of words, then set up everything
       // in the callback function.
       fetch('data/default.txt')

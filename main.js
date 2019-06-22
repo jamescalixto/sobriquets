@@ -12,7 +12,6 @@ const NUM_CARDS = 25;
 const NUM_ASSASSIN_CARDS = 1;
 const NUM_REGULAR_CARDS = 8; // First player gets 1 extra.
 
-
 // Given a number n, get k random numbers in the range
 // [0,n) without repetition. Precondition that n >= k.
 // Utilizes pseudorandom generator, with seed s.
@@ -28,14 +27,12 @@ function getRandomNumbersWithoutRepetition(s, n, k) {
   return random_numbers;
 }
 
-
 // Check who goes first, based on the hash password.
 // Guaranteed to sync given the same hash password.
 function doesRedGoFirst(hash_password) {
   let rng = new alea(hash_password + hash_password);
   return rng() < 0.5;
 }
-
 
 // Delete existing cards.
 function deleteExistingCards() {
@@ -46,25 +43,24 @@ function deleteExistingCards() {
 }
 
 // Get number of red or blue cards.
-function getNumRedCards(hash_password) {
-  const redGoesFirst = doesRedGoFirst(hash_password);
-  return NUM_REGULAR_CARDS + (redGoesFirst ? 1 : 0);
+function getNumRedCards(hash_name) {
+  const red_goes_first = doesRedGoFirst(hash_name);
+  return NUM_REGULAR_CARDS + (red_goes_first ? 1 : 0);
 }
-function getNumBlueCards(hash_password) {
-  const redGoesFirst = doesRedGoFirst(hash_password);
-  return NUM_REGULAR_CARDS + (redGoesFirst ? 0 : 1);
+function getNumBlueCards(hash_name) {
+  const red_goes_first = doesRedGoFirst(hash_name);
+  return NUM_REGULAR_CARDS + (red_goes_first ? 0 : 1);
 }
-
 
 // Function to test build.
-function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
+function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
   // Remove the cards that already exist.
   deleteExistingCards();
 
   // Does red go first? Controls red (or blue) getting an
   // extra card. Define the extra card.
-  const NUM_RED_CARDS = getNumRedCards(hash_password);
-  const NUM_BLUE_CARDS = getNumBlueCards(hash_password);
+  const NUM_RED_CARDS = getNumRedCards(hash_name);
+  const NUM_BLUE_CARDS = getNumBlueCards(hash_name);
 
   // Indices to words in the word list.
   const word_array = getRandomNumbersWithoutRepetition(
@@ -75,7 +71,7 @@ function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
 
   // Identities of each card. Only used if isSpymaster is true.
   const identity_array = getRandomNumbersWithoutRepetition(
-    hash_password,
+    hash_name + hash_password,
     NUM_CARDS,
     NUM_CARDS
   );
@@ -111,7 +107,7 @@ function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
     // set up the click callback to mark card as clicked.
     // Otherwise, set up the click callback to toggle card
     // state.
-    if (isSpymaster) {
+    if (is_spymaster) {
       setCardIdentity();
       setCardStyle(clone);
     } else {
@@ -123,22 +119,20 @@ function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
         const current_state = clone.getAttribute("state");
         clone.classList.remove("styling-" + current_state);
         clone.setAttribute("state", cycleEnum(card_states, current_state));
-        console.log(current_state, cycleEnum(card_states, current_state))
+        console.log(current_state, cycleEnum(card_states, current_state));
         setCardStyle(clone);
-      })
+      });
     }
 
     document.getElementById("board-container").appendChild(clone);
   }
 }
 
-
 // Add card style based on state attribute.
 function setCardStyle(clone) {
   const current_state = clone.getAttribute("state");
   clone.classList.add("styling-" + current_state);
 }
-
 
 // Given an enumerated type and one of its values,
 // get the next value as defined. Loops around to
@@ -151,4 +145,19 @@ function cycleEnum(enum_var, value) {
   const enum_index =
     (Object.values(enum_var).indexOf(value) + 1) % enum_properties.length;
   return enum_var[enum_properties[enum_index]];
+}
+
+// Gets the number of cards of either red or blue remaining, given
+// whether the player is spymaster and what the hash password is.
+function getRemaining(for_red, is_spymaster, hash_name) {
+  const target_class = for_red ? "styling-red" : "styling-blue";
+  const num_elements = document.getElementsByClassName(target_class).length;
+  if (is_spymaster) {
+    return num_elements;
+  } else {
+    const starting_num = for_red
+      ? getNumRedCards(hash_name)
+      : getNumBlueCards(hash_name);
+    return starting_num - num_elements;
+  }
 }
