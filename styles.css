@@ -100,7 +100,9 @@ article {
 }
 
 .hash-field {
-  width: 100px;
+  width: 90px;
+  padding-left: 5px;
+  padding-right: 5px;
   border: 1px solid gainsboro;
   border-radius: 2px;
 }
@@ -132,6 +134,12 @@ article {
   display: inline;
   padding: 5px;
   font-size: 1.2em;
+}
+
+#status-instructions {
+  color: gray;
+  padding: 10px;
+  font-size: 0.8em;
 }
 
 #status-remaining-container {
