@@ -43,7 +43,14 @@
     </article>
     
     <script type="text/javascript">
-      testBuild();
-      let x = card_states.DEFAULT;
+    // Read in the list of words, then set up everything
+    // in the callback function.
+    fetch('data/default.txt')
+      .then(response => response.text())
+      .then(text => text.split(','))
+      .then(function(text) {
+        testBuild(text);
+        console.log(text);
+      });
     </script>
 </html>

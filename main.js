@@ -38,7 +38,7 @@ function getRandomElements(n, arr) {
 }
 
 // Function to test build.
-function testBuild() {
+function testBuild(word_list) {
   let NUM_CARDS = 25;
   let identity_array = getRandomNumbersWithoutRepetition(Math.random(), NUM_CARDS, NUM_CARDS);
   let word_array = getRandomNumbersWithoutRepetition(Math.random(), word_list.length, NUM_CARDS);
