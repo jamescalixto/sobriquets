@@ -100,7 +100,6 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
     word_list.length,
     NUM_CARDS
   );
-
   // Identities of each card. Only used if isSpymaster is true.
   const identity_array = getRandomNumbersWithoutRepetition(
     hash_name + hash_password,
@@ -153,7 +152,6 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
         // toggle whether it is active or inactive.
         const card_state = clone.getAttribute("state");
         const card_is_active = clone.getAttribute("active");
-        console.log(card_state, card_is_active);
 
         // Remove both possible active states.
         // Safari doesn't support .replace() :(
@@ -169,7 +167,6 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
           clone.classList.add("styling-" + card_state);
         }
 
-        setCardStyleFromState(clone);
         updateStatusBar(hash_name, is_spymaster);
       });
     } else {

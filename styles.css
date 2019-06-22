@@ -87,6 +87,7 @@ article {
 .status-first {
   display: inline;
   padding: 5px;
+  font-size: 1.2em;
 }
 
 [class^="status-remaining"] {
