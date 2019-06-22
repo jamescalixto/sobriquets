@@ -19,38 +19,51 @@ function getRandomNumbersWithoutRepetition(s, n, k) {
       random_numbers.push(i);
     }
   }
-  console.log(random_numbers);
   return random_numbers;
 }
 
-// Get 
+// Check who goes first, based on the hash password.
+function doesRedGoFirst(hash_password) {
+  let rng = new alea(hash_password + hash_password);
+  return (rng() < 0.5);
+}
 
 // Function to test build.
 function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
   // Remove the cards that already exist.
   deleteExistingCards();
-
+  
   // Default to 5x5 grid.
   const NUM_CARDS = 25;
 
+  // Default number of cards.
+  const NUM_ASSASSIN_CARDS = 1;
+  const NUM_REGULAR_CARDS = 8; // First player gets 1 extra.
+
+  // Does red go first? Controls red (or blue) getting an
+  // extra card. Define the extra card.
+  const redGoesFirst = doesRedGoFirst(hash_password);
+  const NUM_RED_CARDS = NUM_REGULAR_CARDS + (redGoesFirst ? 1 : 0);
+  const NUM_BLUE_CARDS = NUM_REGULAR_CARDS + (redGoesFirst ? 0 : 1);
+
   // Indices to words in the word list.
-  let word_array = getRandomNumbersWithoutRepetition(
+  const word_array = getRandomNumbersWithoutRepetition(
     hash_name,
     word_list.length,
     NUM_CARDS
   );
 
   // Identities of each card. Only used if isSpymaster is true.
-  let identity_array = getRandomNumbersWithoutRepetition(
+  const identity_array = getRandomNumbersWithoutRepetition(
     hash_password,
     NUM_CARDS,
     NUM_CARDS
   );
 
   // Clone cards and build them.
-  let card_template = document.getElementById("card-template");
+  const card_template = document.getElementById("card-template");
   for (let i = 0; i < NUM_CARDS; i++) {
-    var clone = card_template.cloneNode(true); // Make copy.
+    const clone = card_template.cloneNode(true); // Make copy.
     clone.style.display = "inline-flex"; // Make copy visible.
 
     // Add word to card.
@@ -58,11 +71,11 @@ function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
       word_list[word_array[i]];
 
     // Set card state.
-    if (identity_array[i] === 0) {
+    if (identity_array[i] < NUM_ASSASSIN_CARDS) {
       clone.setAttribute("state", card_states.ASSASSIN);
-    } else if (identity_array[i] < 10) {
+    } else if (identity_array[i] < NUM_ASSASSIN_CARDS + NUM_RED_CARDS) {
       clone.setAttribute("state", card_states.RED);
-    } else if (identity_array[i] < 18) {
+    } else if (identity_array[i] < NUM_ASSASSIN_CARDS + NUM_RED_CARDS + NUM_BLUE_CARDS) {
       clone.setAttribute("state", card_states.BLUE);
     } else {
       clone.setAttribute("state", card_states.BYSTANDER);
@@ -73,7 +86,7 @@ function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
     // Otherwise, set up the click callback to toggle card
     // state.
     if (isSpymaster) {
-      addCardStyle(clone);
+      setCardStyle(clone);
     } else {
 
     }
@@ -83,8 +96,8 @@ function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
 }
 
 // Add card style based on state attribute.
-function addCardStyle(clone) {
-  // Set card format based on state.
+function setCardStyle(clone) {
+  // Set card styling based on state.
   switch (clone.getAttribute("state")) {
     case card_states.ASSASSIN:
       clone.className += " styling-assassin";

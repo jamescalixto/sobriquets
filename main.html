@@ -25,11 +25,11 @@
     <article id="article">
       <div id="hash-container">
         <div id="hash-name" class="hash-instructions">
-          (all) enter the room name
+          (all players) enter the room name
           <input type="text" id="hash-name-field" value="">
         </div>
         <div id="hash-password" class="hash-instructions">
-          (spymaster) enter a password
+          (spymaster only) enter a password
           <input type="text" id="hash-password-field" value="">
         </div>
         <div id="hash-submit" class="hash-instructions">
@@ -51,6 +51,15 @@
       let hash_name = document.getElementById("hash-name-field").value;
       let hash_password = document.getElementById("hash-password-field").value;
       let isSpymaster = (hash_password !== "");
+
+      // Extra salting for reusability.
+      // Players in the same time period (length given by SALT_PERIOD) will have
+      // their hashes synchronized; outside this period the same input will give
+      // different hashes. Allows players to reuse the same inputs.
+      const SALT_PERIOD = 100000000; // in milliseconds; about 27 hours
+      let time_salt = Math.floor(new Date().getTime() / SALT_PERIOD);
+      hash_name += time_salt;
+      hash_password += time_salt;
 
       // Read in the list of words, then set up everything
       // in the callback function.
