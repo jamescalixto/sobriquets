@@ -306,19 +306,25 @@ article {
 
   .card {
     height: 35px;
-    width: 31%;
+    width: 23%;
     margin: 2px;
-  
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
 
     font-size: 0.7em;
   
     border: 1px solid var(--default-emphasis);
     border-radius: 4px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .card {
+    height: 35px;
+    width: 31%;
+    margin: 2px;
+
+    font-size: 0.7em;
   
-    cursor: pointer;
-    user-select: none;
+    border: 1px solid var(--default-emphasis);
+    border-radius: 4px;
   }
 }
