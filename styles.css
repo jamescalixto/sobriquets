@@ -1,17 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Playfair+Display:700|PT+Serif:400|Merriweather:300i|Roboto:400");
 
 :root {
-  --default-emphasis: #DCDCDC;
-  --default: #F4F4F4;
-  --red-emphasis: #F08080;
-  --red: #FFAFAF;
-  --blue-emphasis: #82A6B9;
-  --blue: #B8CFDC;
-  --bystander-emphasis: #F0B380;
-  --bystander: #FFD3AF;
+  --default-emphasis: #dcdcdc;
+  --default: #f4f4f4;
+  --red-emphasis: #f08080;
+  --red: #ffafaf;
+  --blue-emphasis: #82a6b9;
+  --blue: #b8cfdc;
+  --bystander-emphasis: #f0b380;
+  --bystander: #ffd3af;
   --assassin-emphasis: #000000;
   --assassin: #333333;
-  --assassin-text: #FFFFFF;
+  --assassin-text: #ffffff;
 }
 
 header {
@@ -73,18 +73,31 @@ article {
 }
 
 .status-bar {
-  width: 700px;
-  margin: auto;
+  width: 650px;
+  margin: 20px auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
 .status-first {
   display: inline;
+  padding: 5px;
 }
 
-.status-remaining {
+[class^="status-remaining"] {
   display: inline;
+  font-size: 1.5em;
+}
+
+.status-remaining-red {
+  color: var(--red-emphasis);
+}
+.status-remaining-blue {
+  color: var(--blue-emphasis);
+}
+.status-remaining-separator {
+  color: gray;
 }
 
 #board-container {
@@ -128,17 +141,58 @@ article {
   border: 2px solid var(--red-emphasis);
   background-color: var(--red);
 }
+.styling-red-inactive {
+  border: 2px solid var(--red-emphasis);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--red),
+    var(--red) 10px,
+    var(--red-emphasis) 10px,
+    var(--red-emphasis) 20px
+  );
+}
 .styling-blue {
   border: 2px solid var(--blue-emphasis);
   background-color: var(--blue);
+}
+.styling-blue-inactive {
+  border: 2px solid var(--blue-emphasis);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--blue),
+    var(--blue) 10px,
+    var(--blue-emphasis) 10px,
+    var(--blue-emphasis) 20px
+  );
 }
 .styling-bystander {
   border: 2px solid var(--bystander-emphasis);
   background-color: var(--bystander);
 }
+.styling-bystander-inactive {
+  border: 2px solid var(--bystander-emphasis);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--bystander),
+    var(--bystander) 10px,
+    var(--bystander-emphasis) 10px,
+    var(--bystander-emphasis) 20px
+  );
+}
 .styling-assassin {
   border: 2px solid var(--assassin-emphasis);
   background-color: var(--assassin);
+  color: var(--assassin-text);
+}
+.styling-assassin-inactive {
+  border: 2px solid var(--assassin-emphasis);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--assassin),
+    var(--assassin) 10px,
+    var(--assassin-emphasis) 10px,
+    var(--assassin-emphasis) 20px
+  );
   color: var(--assassin-text);
 }
 

@@ -52,32 +52,37 @@ function getNumBlueCards(hash_name) {
   return NUM_REGULAR_CARDS + (red_goes_first ? 0 : 1);
 }
 
-
 // Update the status bar.
 function updateStatusBar(hash_name, is_spymaster) {
   updateStatusFirst(hash_name);
   updateRemainingCards(hash_name, is_spymaster);
 }
 
-// Update who goes first.
+// Update who goes firstin the status bar.
 function updateStatusFirst(hash_name) {
   const status_first = document.getElementById("status-first");
   if (doesRedGoFirst(hash_name)) {
-    status_first.textContent = "RED goes first."
+    status_first.textContent = "RED goes first.";
   } else {
-    status_first.textContent = "BLUE goes first."
+    status_first.textContent = "BLUE goes first.";
   }
-}
 
+  // Set background color.
+  const start_color = doesRedGoFirst(hash_name)
+    ? "--red-emphasis"
+    : "--blue-emphasis";
+  status_first.style.color = getComputedStyle(document.body).getPropertyValue(
+    start_color
+  );
+}
 
 // Update the number of remaining cards.
 function updateRemainingCards(hash_name, is_spymaster) {
   const status_red = document.getElementById("status-remaining-red");
   const status_blue = document.getElementById("status-remaining-blue");
-  status_red.textContent = getRemaining(true, is_spymaster, hash_name) + " remaining.";
-  status_blue.textContent = getRemaining(false, is_spymaster, hash_name) + " remaining.";
+  status_red.textContent = getRemaining(true, is_spymaster, hash_name);
+  status_blue.textContent = getRemaining(false, is_spymaster, hash_name);
 }
-
 
 // Function to build a new board.
 function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
@@ -135,10 +140,38 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
     // Otherwise, set up the click callback to toggle card
     // state.
     if (is_spymaster) {
+      // Attribute to control displaying card as active (untouched)
+      // or inactive (touched).
+      clone.setAttribute("active", true);
+
       setCardIdentity();
-      setCardStyle(clone);
+      setCardStyleFromState(clone);
+
+      // Add toggling for state.
+      clone.addEventListener("click", function() {
+        // For the spymaster, we don't change card identities - we only
+        // toggle whether it is active or inactive.
+        const card_state = clone.getAttribute("state");
+        const card_is_active = clone.getAttribute("active");
+
+        // Remove both possible active states.
+        // Safari doesn't support .replace() :(
+        clone.classList.remove("styling-" + card_state);
+        clone.classList.remove("styling-" + card_state + "-inactive");
+
+        // Toggle styling based on whether card is active.
+        if (card_is_active) {
+          clone.setAttribute("active", false);
+          clone.classList.add("styling-" + card_state + "-inactive");
+        } else {
+          clone.setAttribute("active", true);
+          clone.classList.replace("styling-" + card_state);
+        }
+
+        setCardStyleFromState(clone);
+        updateStatusBar(hash_name, is_spymaster);
+      });
     } else {
-      // Set state to default.
       clone.setAttribute("state", card_states.DEFAULT);
 
       // Add toggling for state.
@@ -147,7 +180,7 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
         clone.classList.remove("styling-" + current_state);
         clone.setAttribute("state", cycleEnum(card_states, current_state));
         console.log(current_state, cycleEnum(card_states, current_state));
-        setCardStyle(clone);
+        setCardStyleFromState(clone);
         updateStatusBar(hash_name, is_spymaster);
       });
     }
@@ -157,7 +190,7 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
 }
 
 // Add card style based on state attribute.
-function setCardStyle(clone) {
+function setCardStyleFromState(clone) {
   const current_state = clone.getAttribute("state");
   clone.classList.add("styling-" + current_state);
 }

@@ -40,10 +40,13 @@
           <h3 id="card-label" class="card-label">sobriquets</h3>
       </div>
 
-      <div id="status-bar" class="status-bar">
-        <div id="status-first" class="status-first">RED goes first.</div>
-        <div id="status-remaining-red" class="status-remaining">2 remaining.</div>
-        <div id="status-remaining-blue" class="status-remaining">5 remaining.</div>
+      <div id="status-bar" class="status-bar" style="display:none">
+        <div id="status-first" class="status-first">??? goes first.</div>
+        <div>
+          <div id="status-remaining-red" class="status-remaining-red">?</div>
+          <div class="status-remaining-separator"> — </div>
+          <div id="status-remaining-blue" class="status-remaining-blue">?</div>
+        </div>
       </div>
       <div id="board-container"></div>
       </div>
@@ -51,10 +54,13 @@
     
     <script type="text/javascript">
     function buildNewGame() {
+      // Make status bar visible.
+      document.getElementById("status-bar").style.display = "flex";
+
       // Get input for seeds.
       let hash_name = document.getElementById("hash-name-field").value;
       let hash_password = document.getElementById("hash-password-field").value;
-      let isSpymaster = (hash_password !== "");
+      let is_spymaster = (hash_password !== "");
 
       // Extra salting for reusability.
       // Players in the same time period (length given by SALT_PERIOD) will have
@@ -71,8 +77,8 @@
         .then(response => response.text())
         .then(text => text.split(','))
         .then(function(word_list) {
-          updateStatusBar(hash_name);
-          buildNewBoard(hash_name, hash_password, word_list, isSpymaster);
+          buildNewBoard(hash_name, hash_password, word_list, is_spymaster);
+          updateStatusBar(hash_name, is_spymaster);
         });
     }
 
