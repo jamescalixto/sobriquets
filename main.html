@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
@@ -7,7 +6,7 @@
     <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
 
     <title>Sobriquets</title>
-    <meta name="description" content="A cooperative "/>
+    <meta name="description" content="An implementation of Codenames."/>
     <meta name="author" content="James Calixto"/>
 
     <link rel="stylesheet" href="styles.css">
@@ -41,7 +40,12 @@
           <h3 id="card-label" class="card-label">sobriquets</h3>
       </div>
 
-      <div id="board-container">
+      <div id="status-bar" class="status-bar">
+        <div id="status-first" class="status-first">RED goes first.</div>
+        <div id="status-remaining-red" class="status-remaining">2 remaining.</div>
+        <div id="status-remaining-blue" class="status-remaining">5 remaining.</div>
+      </div>
+      <div id="board-container"></div>
       </div>
     </article>
     
@@ -61,6 +65,7 @@
       hash_name += time_salt;
       hash_password += time_salt;
 
+      console.log(doesRedGoFirst(hash_password));
       // Read in the list of words, then set up everything
       // in the callback function.
       fetch('data/default.txt')

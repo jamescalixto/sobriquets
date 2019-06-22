@@ -1,5 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Playfair+Display:700|PT+Serif:400|Merriweather:300i|Roboto:400");
 
+:root {
+  --default-emphasis: #DCDCDC;
+  --default: #F4F4F4;
+  --red-emphasis: #F08080;
+  --red: #FFAFAF;
+  --blue-emphasis: #82A6B9;
+  --blue: #B8CFDC;
+  --bystander-emphasis: #F0B380;
+  --bystander: #FFD3AF;
+  --assassin-emphasis: #000000;
+  --assassin: #333333;
+  --assassin-text: #FFFFFF;
+}
+
 header {
   max-width: 500px;
   width: 90%;
@@ -58,6 +72,21 @@ article {
   color: gray;
 }
 
+.status-bar {
+  width: 700px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.status-first {
+  display: inline;
+}
+
+.status-remaining {
+  display: inline;
+}
+
 #board-container {
   width: 700px;
   margin: auto;
@@ -76,9 +105,9 @@ article {
   justify-content: center;
   align-items: center;
 
-  background-color: #F4F4F4;
-  border: 2px solid gainsboro;
+  border: 2px solid var(--default-emphasis);
   border-radius: 8px;
+  background-color: var(--default);
 
   cursor: pointer;
   user-select: none;
@@ -92,25 +121,25 @@ article {
 }
 
 .styling-default {
-  border: 2px solid gainsboro;
-  background-color: #F4F4F4;
+  border: 2px solid var(--default-emphasis);
+  background-color: var(--default);
 }
 .styling-red {
-  border: 2px solid #F08080;
-  background-color: #FFAFAF;
+  border: 2px solid var(--red-emphasis);
+  background-color: var(--red);
 }
 .styling-blue {
-  border: 2px solid #82A6B9;
-  background-color: #B8CFDC;
+  border: 2px solid var(--blue-emphasis);
+  background-color: var(--blue);
 }
 .styling-bystander {
-  border: 2px solid #F0B380;
-  background-color: #FFD3AF;
+  border: 2px solid var(--bystander-emphasis);
+  background-color: var(--bystander);
 }
 .styling-assassin {
-  border: 2px solid #000000;
-  background-color: #333333;
-  color: #FFFFFF;
+  border: 2px solid var(--assassin-emphasis);
+  background-color: var(--assassin);
+  color: var(--assassin-text);
 }
 
 /* Responsive design */

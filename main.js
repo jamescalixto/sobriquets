@@ -7,6 +7,11 @@ const card_states = {
   ASSASSIN: "assassin"
 };
 
+// Define default number of cards.
+const NUM_CARDS = 25;
+const NUM_ASSASSIN_CARDS = 1;
+const NUM_REGULAR_CARDS = 8; // First player gets 1 extra.
+
 
 // Given a number n, get k random numbers in the range
 // [0,n) without repetition. Precondition that n >= k.
@@ -25,6 +30,7 @@ function getRandomNumbersWithoutRepetition(s, n, k) {
 
 
 // Check who goes first, based on the hash password.
+// Guaranteed to sync given the same hash password.
 function doesRedGoFirst(hash_password) {
   let rng = new alea(hash_password + hash_password);
   return rng() < 0.5;
@@ -39,24 +45,26 @@ function deleteExistingCards() {
   }
 }
 
+// Get number of red or blue cards.
+function getNumRedCards(hash_password) {
+  const redGoesFirst = doesRedGoFirst(hash_password);
+  return NUM_REGULAR_CARDS + (redGoesFirst ? 1 : 0);
+}
+function getNumBlueCards(hash_password) {
+  const redGoesFirst = doesRedGoFirst(hash_password);
+  return NUM_REGULAR_CARDS + (redGoesFirst ? 0 : 1);
+}
+
 
 // Function to test build.
 function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
   // Remove the cards that already exist.
   deleteExistingCards();
 
-  // Default to 5x5 grid.
-  const NUM_CARDS = 25;
-
-  // Default number of cards.
-  const NUM_ASSASSIN_CARDS = 1;
-  const NUM_REGULAR_CARDS = 8; // First player gets 1 extra.
-
   // Does red go first? Controls red (or blue) getting an
   // extra card. Define the extra card.
-  const redGoesFirst = doesRedGoFirst(hash_password);
-  const NUM_RED_CARDS = NUM_REGULAR_CARDS + (redGoesFirst ? 1 : 0);
-  const NUM_BLUE_CARDS = NUM_REGULAR_CARDS + (redGoesFirst ? 0 : 1);
+  const NUM_RED_CARDS = getNumRedCards(hash_password);
+  const NUM_BLUE_CARDS = getNumBlueCards(hash_password);
 
   // Indices to words in the word list.
   const word_array = getRandomNumbersWithoutRepetition(
@@ -76,6 +84,7 @@ function buildNewBoard(hash_name, hash_password, word_list, isSpymaster) {
   const card_template = document.getElementById("card-template");
   for (let i = 0; i < NUM_CARDS; i++) {
     const clone = card_template.cloneNode(true); // Make copy.
+    clone.id = "card-" + i;
     clone.style.display = "inline-flex"; // Make copy visible.
 
     // Add word to card.
