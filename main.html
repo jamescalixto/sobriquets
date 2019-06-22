@@ -23,16 +23,24 @@
 
     <article id="article">
       <div id="hash-container">
-        <div id="hash-name" class="hash-instructions">
-          (all players) enter the room name
-          <input type="text" id="hash-name-field" value="">
+        <div id="hash-container-input">
+          <div id="hash-name" class="hash-container-field">
+            <div class="hash-element">(all players) enter the room name</div>
+            <div class="hash-element">
+              <input type="text" id="hash-name-field" class="hash-field" value="">
+            </div>
+          </div>
+          <div id="hash-password" class="hash-container-field">
+              <div class="hash-element">(spymaster only) enter a password</div>
+              <div class="hash-element">
+                <input type="text" id="hash-password-field" class="hash-field" value="">
+              </div>
+          </div>
         </div>
-        <div id="hash-password" class="hash-instructions">
-          (spymaster only) enter a password
-          <input type="text" id="hash-password-field" value="">
-        </div>
-        <div id="hash-submit" class="hash-instructions">
-          <input type="button" id="hash-submit-button" onclick="buildNewGame()" value="Start game"> 
+        <div id="hash-container-submit">
+          <div id="hash-submit" class="hash-instructions">
+            <input type="button" id="hash-submit-button" class="submit-button" onclick="buildNewGame()" value="Start game"> 
+          </div>
         </div>
       </div>
 
@@ -40,11 +48,11 @@
           <h3 id="card-label" class="card-label">sobriquets</h3>
       </div>
 
-      <div id="status-bar" class="status-bar" style="display:none">
-        <div id="status-first" class="status-first">??? goes first.</div>
-        <div>
+      <div id="status-bar" style="display:none">
+        <div id="status-first">??? goes first.</div>
+        <div id="status-remaining-container">
           <div id="status-remaining-red" class="status-remaining-red">?</div>
-          <div class="status-remaining-separator"> — </div>
+          <div id="status-remaining-separator"> — </div>
           <div id="status-remaining-blue" class="status-remaining-blue">?</div>
         </div>
       </div>

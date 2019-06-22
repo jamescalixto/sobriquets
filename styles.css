@@ -37,6 +37,7 @@ h2 {
   margin: 0px auto 10px auto;
   color: gray;
   font-size: 1em;
+  line-height: 1em;
   font-family: "PT Serif", "Times New Roman", Times, serif;
   font-weight: normal;
 }
@@ -66,17 +67,60 @@ article {
 }
 
 #hash-container {
+  width: 420px;
   margin: 10px auto;
   text-align: center;
-  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 0.9em;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.hash-instructions {
+#hash-container-input {
+  text-align: right;
+
+  font-size: 0.75em;
+  font-style: italic;
   color: gray;
 }
 
-.status-bar {
+.hash-container-field {
+  width: 280px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.hash-element {
+  display: inline;
+  vertical-align: middle;
+  line-height: 2em;
+}
+
+.hash-field {
+  width: 100px;
+  border: 1px solid gainsboro;
+  border-radius: 2px;
+}
+
+.submit-button {
+  background-color: var(--default);
+  border: 1px solid var(--default-emphasis);
+  border-radius: 2px;
+  color: var(--assassin);
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.submit-button:hover {
+  background-color: var(--default-emphasis);
+}
+
+#status-bar {
   width: 650px;
   margin: 20px auto;
   display: flex;
@@ -84,24 +128,30 @@ article {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
-.status-first {
+#status-first {
   display: inline;
   padding: 5px;
   font-size: 1.2em;
 }
 
-[class^="status-remaining"] {
-  display: inline;
-  font-size: 1.5em;
+#status-remaining-container {
+  width: 50px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+[class^="status-remaining"] {
+  display: flex;
+  font-size: 1.5em;
+}
 .status-remaining-red {
   color: var(--red-emphasis);
 }
 .status-remaining-blue {
   color: var(--blue-emphasis);
 }
-.status-remaining-separator {
+#status-remaining-separator {
   color: gray;
 }
 
@@ -202,5 +252,5 @@ article {
 }
 
 /* Responsive design */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
 }
