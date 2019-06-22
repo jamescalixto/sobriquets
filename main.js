@@ -52,7 +52,34 @@ function getNumBlueCards(hash_name) {
   return NUM_REGULAR_CARDS + (red_goes_first ? 0 : 1);
 }
 
-// Function to test build.
+
+// Update the status bar.
+function updateStatusBar(hash_name, is_spymaster) {
+  updateStatusFirst(hash_name);
+  updateRemainingCards(hash_name, is_spymaster);
+}
+
+// Update who goes first.
+function updateStatusFirst(hash_name) {
+  const status_first = document.getElementById("status-first");
+  if (doesRedGoFirst(hash_name)) {
+    status_first.textContent = "RED goes first."
+  } else {
+    status_first.textContent = "BLUE goes first."
+  }
+}
+
+
+// Update the number of remaining cards.
+function updateRemainingCards(hash_name, is_spymaster) {
+  const status_red = document.getElementById("status-remaining-red");
+  const status_blue = document.getElementById("status-remaining-blue");
+  status_red.textContent = getRemaining(true, is_spymaster, hash_name) + " remaining.";
+  status_blue.textContent = getRemaining(false, is_spymaster, hash_name) + " remaining.";
+}
+
+
+// Function to build a new board.
 function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
   // Remove the cards that already exist.
   deleteExistingCards();
@@ -121,6 +148,7 @@ function buildNewBoard(hash_name, hash_password, word_list, is_spymaster) {
         clone.setAttribute("state", cycleEnum(card_states, current_state));
         console.log(current_state, cycleEnum(card_states, current_state));
         setCardStyle(clone);
+        updateStatusBar(hash_name, is_spymaster);
       });
     }
 

@@ -65,14 +65,13 @@
       hash_name += time_salt;
       hash_password += time_salt;
 
-      console.log(hash_name);
-
       // Read in the list of words, then set up everything
       // in the callback function.
       fetch('data/default.txt')
         .then(response => response.text())
         .then(text => text.split(','))
         .then(function(word_list) {
+          updateStatusBar(hash_name);
           buildNewBoard(hash_name, hash_password, word_list, isSpymaster);
         });
     }
