@@ -15,6 +15,7 @@
 
   <body>
     <script type="text/javascript" src="main.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/seedrandom.min.js"></script>
 
     <header>
       <h1>Sobriquets</h1>
@@ -23,16 +24,18 @@
 
     <article id="article">
       <div id="hash-container">
-        <div id="hash-board" class="hash-instructions">
+        <div id="hash-name" class="hash-instructions">
           (all) enter the room name
+          <input type="text" id="hash-name" value="">
         </div>
-        <div id="hash-identity" class="hash-instructions">
+        <div id="hash-password" class="hash-instructions">
           (spymaster) enter a password
+          <input type="text" id="hash-password" value="">
         </div>
       </div>
 
       <div id="card-template" class="card" style="display:none">
-          <h3 class="card-label">millionaires</h3>
+          <h3 id="card-label" class="card-label">spaceship</h3>
       </div>
 
       <div id="board-container">
@@ -41,5 +44,6 @@
     
     <script type="text/javascript">
       testBuild();
+      let x = card_states.DEFAULT;
     </script>
 </html>
