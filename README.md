@@ -24,3 +24,13 @@ I am using the same slightly rounded rectangle aesthetic that I have honed over 
 The combination of Playfair Display, PT Serif, and Roboto continues to look great; I may overhaul my main website to utilize this triad.
 
 When designing the responsive layout for narrower phones, I realized that there was no particular reason why the board needed to be 5x5 aside from aesthetics. Thus at narrow widths the board becomes 3x8. I also toyed with the idea of creating a checklist mode, which would be less visually pleasing but far easier to work with as the spymaster. I did not end up implementing this but only due to the 3x8 layout being sufficient.
+
+## Directories and files
+### `data`
+Holds the `default.txt` file, a word list from [this website](https://www.horsepaste.com/). 
+
+### `img`
+This directory holds the favicon for the page.
+
+### `main.html`, `main.js`, `styles.css`
+These three files make up the main body of the project and are the visible segments of [the project](https://jamescalixto.com/site/wp-content/uploads/media/sobriquets/main.html).
