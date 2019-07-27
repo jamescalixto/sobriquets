@@ -16,7 +16,7 @@ I used something slightly more sophisticated than the honor system to ensure syn
 
 To ensure a novel stream of boards, I hash these seeds with an appropriate time interval so that using the same seeds about three hours apart gives a new board and identities. Otherwise, common seeds might recur enough to become predictable.
 
-Slight quirk of my implementation: the number of red/blue cards is actually determined by the public board seed and not the private identity seed. This is so everyone has a counter of how many cards are left. The downside is that the same board will have the same team going first for periods of three hours; this is a small price to pay for the convenience and is easily mitigated by choosing a different seed.
+Slight quirk of my implementation: the number of red/blue cards is actually determined by the public board seed and not the private identity seed. This way, everyone has a counter of how many cards are left. The downside is that the same board will have the same team going first for periods of three hours; this is a small price to pay for the convenience and is easily mitigated by choosing a different seed.
 
 ### Visual design
 I am using the same slightly rounded rectangle aesthetic that I have honed over my previous two projects ([here](https://github.com/jamescalixto/wing-menu-optimization) and [here](https://github.com/jamescalixto/washington-post-now-headlines)), but further refined. I am also using a nicely expanded color palette courtesy of some online palette generator.
