@@ -1,6 +1,6 @@
 # sobriquets
 
-Repository for my [Sobriquets](https://jamescalixto.com/site/wp-content/uploads/media/sobriquets/main.html) project. Check it out!
+Repository for my [Sobriquets](https://jamescalixto.com/sobriquets/) project. Check it out!
 
 ## Background
 My friends and I are big fans of [Codenames](https://boardgamegeek.com/boardgame/178900/codenames), a team board game where you try to pick out your team's words based on hints. (It's hard to explain, read the game rules for more!)
@@ -33,4 +33,4 @@ Holds the `default.txt` file, a word list from [this website](https://www.horsep
 This directory holds the favicon for the page.
 
 ### `main.html`, `main.js`, `styles.css`
-These three files make up the main body of the project and are the visible segments of [the project](https://jamescalixto.com/site/wp-content/uploads/media/sobriquets/main.html).
+These three files make up the main body of the project and are the visible segments of [the project](https://jamescalixto.com/sobriquets/).
